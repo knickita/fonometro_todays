@@ -1,0 +1,54 @@
+ 
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Rilevazione Acustica Todays 2024</title>
+ </head>
+ <body>     
+     <h1 id="display">42</h1>
+     <h3>dB LAeq 10"</h3>
+ </body>
+ <style>
+      body {
+          font-family: Arial, sans-serif;
+          color: white;
+          text-align: center;
+          background-color: black;
+          margin: 0;
+          padding: 0;
+      }
+  </style>
+
+
+  <script>
+     document.addEventListener("DOMContentLoaded", function() {      
+      getLastNRowsFromGoogleSheet();
+      setInterval(getLastNRowsFromGoogleSheet, 30000); // repeat every 30 seconds
+    });
+
+    function getLastNRowsFromGoogleSheet() {
+      const url = `https://docs.google.com/spreadsheets/d/1-4rdXZ7kTRsVGQJ2H4JChhEl4PlmJE42/gviz/tq?tqx=responseHandler:myCallback`;
+      const script = document.createElement('script');
+      script.src = url;
+      document.body.appendChild(script);
+
+      window.myCallback = function(data) {        
+        const rows = data.table.rows;
+        const lastRow = rows[rows.length - 1];
+        const lastValue = lastRow.c[1].v;
+
+        //fai la media delle ultime 10 righe
+        var sum = 0;
+        for (var i = rows.length - 10; i < rows.length; i++) {
+          sum += rows[i].c[1].v;
+        }
+        var avg = sum / 10;
+
+        document.getElementById('display').innerHTML=avg.toFixed(1);
+      };
+    }
+  </script>
+ </html>
+ 
