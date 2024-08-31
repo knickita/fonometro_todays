@@ -36,11 +36,13 @@
 
     function getLastNRowsFromGoogleSheet() {
       //const url = `https://docs.google.com/spreadsheets/d/1-4rdXZ7kTRsVGQJ2H4JChhEl4PlmJE42/gviz/tq?tqx=responseHandler:myCallback`;
-      const url = `https://docs.google.com/spreadsheets/d/1-ChzNRGrvaDVfi1l1Z-wSCbsDCq4RbXu/gviz/tq?tqx=responseHandler:myCallback`;
+      const url = `https://docs.google.com/spreadsheets/d/1-QCrcROjtIAWKNl9B1l8HhPATyOZ_dDo/gviz/tq?tqx=responseHandler:myCallback`;
 
       const script = document.createElement('script');
       script.src = url;
       document.body.appendChild(script);
+
+      console.log("Versione 3");
 
       window.myCallback = function(data) {        
         const rows = data.table.rows;
